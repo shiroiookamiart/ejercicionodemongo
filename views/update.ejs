@@ -1,0 +1,73 @@
+<meta charset="UTF-8">
+<title>
+    <%= title %>
+</title>
+
+<!-- CSS (load bootstrap from a CDN) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    body { padding-top:50px; }
+</style>
+<div class="container">
+    <div class="alert alert-info" role="alert">
+        <h3>
+            Ingrese nuevo usuario
+        </h3>
+      </div>
+    <form method="post" action="/update">
+        <div class="form-group">
+        <label for="exampleInputEmail1">Nombre</label>
+        <input type="text" name="name" value="<%= locals?.data.name %>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre">
+        </div>
+        <div class="form-group">
+        <label for="exampleInputPassword1">Apellido</label>
+        <input type="text" name="apellido" value="<%= locals?.data.apellido %>" class="form-control" id="exampleInputPassword1" placeholder="Apellido">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Dni</label>
+            <input type="text" name="dni" value="<%= locals?.data.dni %>" class="form-control" id="exampleInputPassword1" placeholder="Dni">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Sexo</label>
+            <select class="form-control" name="sexo">
+                <option>[seleccion un sexo]</option>
+                <% sexo.forEach(function(s) { %>
+                    <% if (locals?.data.sexo == s.name) { %>
+                        <option selected><%= s.name %></option>
+                    <% }else{ %>
+                        <option><%= s.name %></option>
+                    <% } %>        
+                <% }); %>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Departamento</label>
+            <select class="form-control" name="departamento">
+                <option>[seleccion un departamento]</option>
+                <% departamentos.forEach(function(d) { %>
+                    <% if (locals?.data.departamento == d.name) { %>
+                        <option selected><%= d.name %></option>
+                    <% }else{ %>
+                        <option><%= d.name %></option>
+                    <% } %>   
+                <% }); %>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Jefes</label>
+            <select class="form-control" name="jefe">
+                <option>[seleccion un responsable]</option>
+                <% jefes.forEach(function(j) { %>
+                    <% if (locals?.data.jefe == j.name) { %>
+                        <option selected><%= j.name %></option>
+                    <% }else{ %>
+                        <option><%= j.name %></option>
+                    <% } %> 
+                <% }); %>
+            </select>
+        </div>
+        <input type="hidden" name="_id" value="<%= locals?.data._id %>">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="/listado" class="btn btn-info">Listado</a>
+    </form>
+</div> 

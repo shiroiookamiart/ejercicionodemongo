@@ -1,0 +1,57 @@
+<meta charset="UTF-8">
+<title>
+    <%= title %>
+</title>
+
+<!-- CSS (load bootstrap from a CDN) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    body { padding-top:50px; }
+</style>
+<div class="container">
+    <% if (locals?.success) { %>
+        <div class="alert alert-success" role="alert">
+            <h3>
+                <%= locals?.success %>
+            </h3>
+        </div>
+        <br>    
+    <% } %>
+    <div class="alert alert-info" role="alert">
+        <h3>
+            Listado de usuarios
+        </h3>
+    </div>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">dni</th>
+            <th scope="col">Sexo</th>
+            <th scope="col">Departamento</th>
+            <th scope="col">Responsable</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% e.forEach(function(em) { %>
+                <tr>
+                    <th><%= em._id %></th>
+                    <td><%= em.name %></td>
+                    <td><%= em.apellido %></td>
+                    <td><%= em.dni %></td>
+                    <td><%= em.sexo %></td>
+                    <td><%= em.departamento %></td>
+                    <td><%= em.jefe %></td>
+                    <td>
+                        <a href="/eliminar/<%= em._id %>" class="btn btn-danger">Borrar</a>
+
+                        <a href="/update/<%= em._id %>" class="btn btn-success">Actualizar</a>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+      </table>
+</div>      
